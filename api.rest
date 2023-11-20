@@ -1,0 +1,39 @@
+###
+
+GET http://localhost:3000/api/users
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "nombre": "Isabel",
+    "edad": 29
+}
+
+###
+
+GET http://localhost:3000/api/users/1
+
+###
+
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "nombre": "Hernando", 
+    "edad": 19 
+}
+
+###
+
+PUT http://localhost:3000/api/users/1 HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "nombre": "Alberto", 
+    "edad": 99 
+}
+
+###
+DELETE http://localhost:3000/api/users/1
