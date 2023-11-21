@@ -1,7 +1,8 @@
-import { Users } from "@/lib/users";
+import getUsers from "@/lib/users";
 
 export function GET(request, { params }) {
-    let usuario = Users.find(user => user.id == params.id)
+    let users = getUsers();
+    let usuario = users.find(user => user.id == params.id)
 
     return Response.json(usuario)
 }
@@ -12,24 +13,26 @@ export async function PUT(request, { params }) {
     if (content != 'application/json')
         return Response.json({ message: 'Debes proporcionar datos JSON' })
 
+    let users = getUsers();
     // Obtenemos posición    
-    const pos = Users.findIndex(user => user.id == params.id)
+    const pos = users.findIndex(user => user.id == params.id)
 
     // Modificamos usuario
     const newUser = await request.json()
-    Users.splice(pos, 1, { id: Number(params.id), ...newUser })
+    users.splice(pos, 1, { id: Number(params.id), ...newUser })
 
-    return Response.json(Users)
+    return Response.json(users)
 }
 
 
 export function DELETE(request, { params }) {
+    let users = getUsers();
     // Obtenemos posición    
-    const pos = Users.findIndex(user => user.id == Number(params.id))
+    const pos = users.findIndex(user => user.id == Number(params.id))
 
     // Eliminamos usuario
     if (pos != -1)  // Si es encontrado
-        Users.splice(pos, 1)
+        users.splice(pos, 1)
 
-    return Response.json(Users)
+    return Response.json(users)
 }

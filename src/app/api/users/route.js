@@ -1,7 +1,8 @@
-import { Users } from "@/lib/users";
+import getUsers from "@/lib/users";
 
-export function GET() {    
-    return Response.json(Users)
+export function GET() {
+    let users = getUsers();
+    return Response.json(users)
 }
 
 
@@ -11,10 +12,11 @@ export async function POST(request) {
     if (content != 'application/json')
         return Response.json({ message: 'Debes proporcionar datos JSON' })
 
-    let sig = Math.max( ...Users.map( u => u.id ))+1
+    let users = getUsers();
+    let sig = Math.max(...users.map(u => u.id)) + 1
 
     const newUser = await request.json()
-    Users.push({ id: sig, ...newUser })
-    return Response.json(Users)
+    users.push({ id: sig, ...newUser })
+    return Response.json(users)
 }
 
