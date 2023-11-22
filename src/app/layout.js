@@ -1,5 +1,5 @@
 import './globals.css'
-import { Users } from "@/lib/users";
+import { Users } from "@/lib/productos";
 
 export const metadata = {
   title: 'Next API',
